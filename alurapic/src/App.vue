@@ -5,9 +5,8 @@
 <input type="search" class="filtro" v-on:input="filtro = $event.target.value" placeholder="filtre por parte do titulo">
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto of fotosComFiltro" v-bind:key="foto.titulo">
-
         <meu-painel :titulo="foto.titulo">
-          <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo" />
+        <imagem-responsiva v-bind:url="foto.url" v-bind:titulo="foto.titulo"></imagem-responsiva>
         </meu-painel>
 
       </li>
@@ -16,14 +15,19 @@
 </template>
 
 <script>
+
+/*Importa um componente e comeca a utiliza-lo */
 import Painel from './components/shared/painel/Painel';
+import ImagemResponsiva from './components/shared/imagem-responsiva/ImagemResponsiva';
 
 export default {
 
   components:{
-    'meu-painel' : Painel
+    'meu-painel' : Painel,
+    'imagem-responsiva' : ImagemResponsiva
   },
 
+/*Retorna para view os seguintes dados */
   data() {
     return {
       titulo: "AluraPic",
@@ -46,6 +50,7 @@ export default {
     }
   },
 
+/*Requisição ao chamar a tela */
   created() {
     this.$http
       .get("http://localhost:3000/v1/fotos")
@@ -82,10 +87,6 @@ export default {
 
 .lista-fotos .lista-fotos-item {
   display: inline-block;
-}
-
-.imagem-responsiva {
-  width: 100%;
 }
 
 .filtro {

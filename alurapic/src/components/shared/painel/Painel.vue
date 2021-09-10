@@ -1,17 +1,17 @@
-
-
 <template>
     <div class="painel">
-        <h2 class="painel-titulo" v-on:dblclick="visivel = !visivel">{{ titulo }}</h2>
-        <div class="painel-conteudo" v-show="visivel">
-            <slot></slot>
+        <h2 class="painel-titulo" v-on:click="visivel = !visivel">{{ titulo }}</h2>
+        <transition name="painel-fade">
+            <div class="painel-conteudo" v-show="visivel">
+                <slot></slot>
         </div>
+        </transition>
     </div>
 </template>
 
 <script>
 export default {
-    props: ["titulo"],
+    props: ["titulo"], /* Permite obter o valor do titulo e colocar na tag H2*/
 
     data(){
         return{
@@ -49,5 +49,14 @@ export default {
 * {
     box-shadow: 5px 5px 5px black;
 }
+
+.painel-fade-enter, .painel-fade-leave-active {
+    opacity: 0
+}
+
+.painel-fade-enter-active, .painel-fade-leave-active {
+    transition: opacity .4s /*400 milisegundos */
+}
+
 
 </style>
