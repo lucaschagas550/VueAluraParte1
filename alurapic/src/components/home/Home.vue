@@ -7,7 +7,8 @@
                 <li class="lista-fotos-item" v-for="foto of fotosComFiltro" v-bind:key="foto.titulo">
                     
                     <meu-painel :titulo="foto.titulo">
-                    <imagem-responsiva v-bind:url="foto.url" v-bind:titulo="foto.titulo"></imagem-responsiva>
+                        <imagem-responsiva v-bind:url="foto.url" v-bind:titulo="foto.titulo"/>
+                        <meu-botao tipo="button" rotulo="REMOVER" @botaoAtivado="remove($event, foto)" v-bind:confirmacao="true" estilo="perigo"/>
                     </meu-painel>
 
                 </li>
@@ -20,12 +21,14 @@
 /*Importa um componente e comeca a utiliza-lo */
 import Painel from '../shared/painel/Painel';
 import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva';
+import Botao from '../shared/botao/Botao';
 
 export default {
 
     components:{
         'meu-painel' : Painel,
-        'imagem-responsiva' : ImagemResponsiva
+        'imagem-responsiva' : ImagemResponsiva,
+        'meu-botao' : Botao
     },
 
 /*Retorna para view os seguintes dados */
@@ -50,6 +53,13 @@ export default {
             {
                 return this.fotos;
             }
+        }
+    },
+
+    methods: {
+        remove($event, foto){
+            alert($event);  /*Dado enviado do componente botao(pai(componente botao) para o filho(tela)) */
+            alert('Remover a foto! ' + foto.titulo);
         }
     },
 
