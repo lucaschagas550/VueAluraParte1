@@ -4,7 +4,7 @@
         <transition name="painel-fade">
             <div class="painel-conteudo" v-show="visivel">
                 <slot></slot>
-        </div>
+            </div>
         </transition>
     </div>
 </template>
